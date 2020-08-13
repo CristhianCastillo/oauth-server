@@ -4,12 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "user")
@@ -17,8 +12,14 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserSecurityEntity {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "user_sequence_key_id")
+    @SequenceGenerator(
+            name = "user_sequence_key_id",
+            sequenceName = "user_sequence_key_id",
+            initialValue = 1
+    )
     private Long id;
     @Column(nullable = false, name = "email")
     private String email;
